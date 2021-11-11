@@ -4,39 +4,11 @@
 #include <student.hpp>
 
 TEST(Test1, collect_inform){
-  const std::string data_from_file = "{\n"
-      "  \"items\": [\n"
-      "    {\n"
-      "      \"name\": \"Ivanov Petr\",\n"
-      "      \"group\": \"1\",\n"
-      "      \"avg\": \"4.25\",\n"
-      "      \"debt\": null\n"
-      "    },\n"
-      "    {\n"
-      "      \"name\": \"Sidorov Ivan\",\n"
-      "      \"group\": 31,\n"
-      "      \"avg\": 4,\n"
-      "      \"debt\": \"C++\"\n"
-      "    },\n"
-      "    {\n"
-      "      \"name\": \"Petrov Nikita\",\n"
-      "      \"group\": \"IU8-31\",\n"
-      "      \"avg\": 3.33,\n"
-      "      \"debt\": [\n"
-      "        \"C++\",\n"
-      "        \"Linux\",\n"
-      "        \"Network\"\n"
-      "      ]\n"
-      "    }\n"
-      "  ],\n"
-      "  \"_meta\": {\n"
-      "    \"count\": 3\n"
-      "  }\n"
-      "}";
-  nlohmann::json obj_1 = json::parse(data_from_file);
+  std::ifstream jsonFile("/home/kseniya/lab-01-parser/tests/students.json");
+  nlohmann::json obj_1 = nlohmann::json::parse(jsonFile);
   const std::string &path = "/home/kseniya/lab-01-parser/tests/students.json";
   nlohmann::json obj_2 = collect_inform(path);
-  ASSERT_EQ(obj_1, obj_2) << "Test passed!";
+  ASSERT_EQ(obj_1, obj_2);
 }
 TEST(Test2, parse_file){
   Student one = {"Ivanov Petr", (std::string)"1", (std::string) "4.25", nullptr};
