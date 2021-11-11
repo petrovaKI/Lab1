@@ -13,7 +13,7 @@ json collect_inform(const std::string &path) {
   if (!data.at("items").is_array())
     throw std::runtime_error{"The items in the file must be an array!"};
   if (data.at("items").size() != data.at("_meta").at("count").get<size_t>())
-    throw std::runtime_error{"Value in _meta corresponds to the length of the array item"};
+    throw std::runtime_error{"Value in _meta uncorrect"};
 
   return data;
 }
@@ -23,7 +23,8 @@ auto get_name(const json &data) -> std::string {
 
 auto get_group(const json &data) -> std::any {
   if (data.is_string()) return data.get<std::string>();
-  else return data.get<std::size_t>();
+  else
+    return data.get<std::size_t>();
 }
 auto get_avg(const json &data) -> std::any {
   if (data.is_null())
@@ -73,11 +74,11 @@ void print() {
 void print(const Student &student, std::ostream &os) {
   os << "|" << std::setfill(' ') << std::setw(24) << std::left << std::any_cast<std::string>(student.name) << std::right << "|";
 
-  if(student.group.type() == typeid(std::string))
+  if( student.group.type() == typeid(std::string) )
     os << std::setw(9) << std::left << std::any_cast<std::string>(student.group)<< std::right << "|";
   else os << std::setw(9) << std::left <<  std::any_cast<size_t>(student.group) << "|";
 
-  if(student.avg.type() == typeid(std::string))
+  if( student.avg.type() == typeid(std::string) )
     os << std::setw(9) << std::left << std::any_cast<std::string>(student.avg) << "|";
   else if(student.avg.type() == typeid(double))
     os << std::setw(9) << std::left << std::any_cast<double>(student.avg) << "|";

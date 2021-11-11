@@ -20,9 +20,9 @@ struct Student //structure that contains information about the student
   std::any avg;
   std:: any debt;
 };
-json collect_inform(const std::string &path); //collecting information from a file
-void make_stud (const json &data, Student &st); //adding data from file to the programm
-std::vector<Student> parse_file (json &data);
+json collect_inform(const std::string &path);
+void make_stud(const json &data, Student &st);
+std::vector<Student> parse_file(json &data);
 void print();
 void print(const Student &student, std::ostream &os);
 void print(std::vector<Student> &students, std::ostream &os);

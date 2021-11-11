@@ -3,7 +3,7 @@
 #include <gtest/gtest.h>
 #include <student.hpp>
 
-TEST(Test1, collect_inform) {
+TEST(Test1, collect_inform){
   const std::string data_from_file = "{\n"
       "  \"items\": [\n"
       "    {\n"
