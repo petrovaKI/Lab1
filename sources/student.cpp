@@ -68,32 +68,40 @@ void print() {
             << "|" << std::setw(9) << std::left << "group"
             << "|" << std::setw(9) << std::left << "avg"
             << "|" << std::setw(9) << std::left << "debt" << "|"<< std::endl;
-  std::cout << "+" << std::setfill('-') << std::setw(25) << std::right << "+" << std::setw(10)
-            << "+" << std::setw(10) << "+" << std::setw(10) << std::right << "+" << std::endl;
+  std::cout << "+" << std::setfill('-') << std::setw(25)
+            << std::right << "+" << std::setw(10)
+            << "+" << std::setw(10) << "+"
+            << std::setw(10) << std::right << "+" << std::endl;
 }
 void print(const Student &student, std::ostream &os) {
-  os << "|" << std::setfill(' ') << std::setw(24) << std::left << std::any_cast<std::string>(student.name) << std::right << "|";
-
-  if( student.group.type() == typeid(std::string) )
-    os << std::setw(9) << std::left << std::any_cast<std::string>(student.group)<< std::right << "|";
-  else os << std::setw(9) << std::left <<  std::any_cast<size_t>(student.group) << "|";
-
+  os << "|" << std::setfill(' ') << std::setw(24)
+     << std::left << std::any_cast<std::string>(student.name)
+     << std::right << "|";
+  if(student.group.type() == typeid(std::string))
+    os << std::setw(9) << std::left << std::any_cast<std::string>(student.group)
+       << std::right << "|";
+  else os << std::setw(9) << std::left <<  std::any_cast<size_t>(student.group)
+          << "|";
   if( student.avg.type() == typeid(std::string) )
-    os << std::setw(9) << std::left << std::any_cast<std::string>(student.avg) << "|";
+    os << std::setw(9) << std::left
+       << std::any_cast<std::string>(student.avg) << "|";
   else if(student.avg.type() == typeid(double))
     os << std::setw(9) << std::left << std::any_cast<double>(student.avg) << "|";
   else if(student.avg.type() == typeid(std::size_t))
     os << std::setw(9) << std:: left << std::any_cast<size_t>(student.avg) << "|";
-
   if(student.debt.type() == typeid(std::nullptr_t))
     os << std::setw(9) << std::left << "null" << "|" << std::endl;
   else if(student.debt.type() == typeid(std::string))
-    os << std::setw(9) << std::left << std::any_cast<std::string>(student.debt) << "|" << std::endl;
-  else  os << std::setw(1) << std::left << std::any_cast<std::vector<std::string>>(student.debt).size()
-           <<std::setw(8) << std::left << " items" << std::right << "|" << std::endl;
+    os << std::setw(9) << std::left << std::any_cast<std::string>(student.debt)
+       << "|" << std::endl;
+  else  os << std::setw(1) << std::left
+       << std::any_cast<std::vector<std::string>>(student.debt).size()
+       << std::setw(8) << std::left
+       << " items" << std::right << "|" << std::endl;
 
-  os << "+" << std::setfill('-') << std::setw(25) << std::right << "+" << std::setw(10)
-     << "+" << std::setw(10) << "+" << std::setw(10) << "+" << std::endl;
+  os << "+" << std::setfill('-') << std::setw(25) << std::right << "+"
+      << std::setw(10)
+      << "+" << std::setw(10) << "+" << std::setw(10) << "+" << std::endl;
 }
 void print(std::vector<Student> &students, std::ostream &os) {
   print();
@@ -103,4 +111,5 @@ void print(std::vector<Student> &students, std::ostream &os) {
 void print_for_test(std::vector<Student> &students, std::ostream &os){
   for(Student &student : students)
     print(student, os);
+
 }
