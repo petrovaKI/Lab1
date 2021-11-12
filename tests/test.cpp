@@ -5,8 +5,8 @@
 
 TEST(Test1, parse_file){
 
-  const std::string &path = "/home/kseniya/lab-01-parser/tests/students.json";
-  nlohmann::json data = collect_inform(path);
+  std::ifstream jsonFile("/home/kseniya/lab-01-parser/tests/students.json");
+  nlohmann::json data = nlohmann::json::parse(jsonFile);
   std::vector<Student> students_2 = parse_file(data);
   std::stringstream ss2;
   print_for_test(students_2, ss2);
