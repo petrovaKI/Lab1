@@ -13,7 +13,7 @@
 #include <iomanip>
 using nlohmann::json;
 
-struct Student //structure that contains information about the student
+struct Student
 {
   std::string name;
   std::any group;

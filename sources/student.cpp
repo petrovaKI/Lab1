@@ -2,7 +2,7 @@
 
 #include <student.hpp>
 
-json collect_inform(const std::string &path) {
+json collect_inform(const std::string &path){
   std::ifstream jf(path);
   json data;
   jf >> data;
