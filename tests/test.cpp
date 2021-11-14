@@ -6,9 +6,11 @@
 TEST(Test, parse_file) {
   EXPECT_TRUE(true);
   std::ifstream jsonFile("/home/kseniya/lab-01-parser/tests/students.json");
-  nlohmann::json data = nlohmann::json::parse(jsonFile);
-  std::vector<Student> students_2 = parse_file(data);
-  print_for_test(students_2, std::cout);
+  nlohmann::json data = json::parse(jsonFile);
+  nlohmann::json data2 = data;
+  std::vector<Student> students_2 = parse_file(data2);
+  std::ostringstream ss;
+  print_for_test(students_2, ss);
 }
 TEST(Test1, correct_types_1){
   const std::string data_str ="{\n"
