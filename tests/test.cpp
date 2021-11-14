@@ -4,12 +4,11 @@
 #include <student.hpp>
 
 TEST(Test, parse_file) {
+  EXPECT_TRUE(true);
   std::ifstream jsonFile("/home/kseniya/lab-01-parser/tests/students.json");
   nlohmann::json data = nlohmann::json::parse(jsonFile);
   std::vector<Student> students_2 = parse_file(data);
-  std::ostringstream ss2;
-  print_for_test(students_2, ss2);
-  EXPECT_TRUE(true);
+  print_for_test(students_2, std::cout);
 }
 TEST(Test1, correct_types_1){
   const std::string data_str ="{\n"
