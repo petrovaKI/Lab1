@@ -3,6 +3,14 @@
 #include <gtest/gtest.h>
 #include <student.hpp>
 
+TEST(Test, parse_file) {
+  std::ifstream jsonFile("/home/kseniya/lab-01-parser/tests/students.json");
+  nlohmann::json data = nlohmann::json::parse(jsonFile);
+  std::vector<Student> students_2 = parse_file(data);
+  std::ostringstream ss2;
+  print_for_test(students_2, ss2);
+  EXPECT_TRUE(true);
+}
 TEST(Test1, correct_types_1){
   const std::string data_str ="{\n"
       "      \"name\": \"Ivanov Petr\",\n"
