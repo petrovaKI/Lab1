@@ -36,9 +36,12 @@ TEST(Test1, parse_file) {
 })";
   std::stringstream ss;
   ss << text;
-  json j_complete = json::parse(ss);
-  std::vector<Student> students_2 = parse_file(j_complete);
-  print_for_test(students_2, std::cout);
+  json obj2 = json::parse(ss);
+  std::vector<Student> students_2 = parse_file(obj2);
+
+  std::stringstream ss2;
+  print_for_test(students_2, ss2);
+
 }
 TEST(Test2, correct_types_1){
   const std::string data_str ="{\n"
