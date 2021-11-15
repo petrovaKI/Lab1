@@ -3,16 +3,44 @@
 #include <gtest/gtest.h>
 #include <student.hpp>
 
-TEST(Test, parse_file) {
-  EXPECT_TRUE(true);
-  std::ifstream jsonFile("/home/kseniya/lab-01-parser/tests/students.json");
-  nlohmann::json data = json::parse(jsonFile);
-  nlohmann::json data2 = data;
-  std::vector<Student> students_2 = parse_file(data2);
-  std::ostringstream ss;
-  print_for_test(students_2, ss);
+TEST(Test1, parse_file) {
+  auto text = R"(
+{
+  "items": [
+    {
+      "name": "Ivanov Petr",
+      "group": "1",
+      "avg": "4.25",
+      "debt": null
+    },
+    {
+      "name": "Sidorov Ivan",
+      "group": 31,
+      "avg": 4,
+      "debt": "C++"
+    },
+    {
+      "name": "Petrov Nikita",
+      "group": "IU8-31",
+      "avg": 3.33,
+      "debt": [
+        "C++",
+        "Linux",
+        "Network"
+      ]
+    }
+  ],
+  "_meta": {
+    "count": 3
+  }
+})";
+  std::stringstream ss;
+  ss << text;
+  json j_complete = json::parse(ss);
+  std::vector<Student> students_2 = parse_file(j_complete);
+  print_for_test(students_2, std::cout);
 }
-TEST(Test1, correct_types_1){
+TEST(Test2, correct_types_1){
   const std::string data_str ="{\n"
       "      \"name\": \"Ivanov Petr\",\n"
       "      \"group\": 1,\n"
@@ -30,7 +58,7 @@ TEST(Test1, correct_types_1){
   ASSERT_TRUE(st.avg.type()==typeid(double));
   ASSERT_TRUE(st.debt.type()== typeid(std::vector<std::string>));
 }
-TEST(Test2, correct_types_2){
+TEST(Test3, correct_types_2){
   const std::string data_str ="{\n"
       "      \"name\": \"Ivanov Petr\",\n"
       "      \"group\": \"IU8-31\",\n"

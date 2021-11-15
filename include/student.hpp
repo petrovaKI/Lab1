@@ -20,6 +20,14 @@ struct Student
   std::any avg;
   std:: any debt;
 };
+class JSON {
+ public:
+  explicit JSON(std::string &j);
+  JSON();
+
+ private:
+  json _j;
+};
 json collect_inform(const std::string &path);
 void make_stud(const json &data, Student &st);
 std::vector<Student> parse_file(json &data);
