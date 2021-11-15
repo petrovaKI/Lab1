@@ -4,6 +4,15 @@
 #include <student.hpp>
 
 TEST(Test1, parse_file) {
+  Student one = {"Ivanov Petr", (std::string)"1", (std::string) "4.25", nullptr};
+  Student two = {"Sidorov Ivan", (size_t)31, (size_t)4, (std::string)"C++" };
+  std::vector<std::string> debts = {"C++", "Linux", "Network"};
+  Student three = {"Petrov Nikita", (std::string)"IU8-31", (double)3.33,
+                   (std::vector<std::string>)debts};
+  std::vector<Student> students_1 = {one, two, three};
+  std::stringstream ss1;
+  print_for_test(students_1, ss1);
+
   auto text = R"(
 {
   "items": [
@@ -38,9 +47,10 @@ TEST(Test1, parse_file) {
   ss << text;
   json obj2 = json::parse(ss);
   std::vector<Student> students_2 = parse_file(obj2);
-
   std::stringstream ss2;
   print_for_test(students_2, ss2);
+
+  ASSERT_EQ(ss1.str(), ss2.str());
 
 }
 TEST(Test2, correct_types_1){
