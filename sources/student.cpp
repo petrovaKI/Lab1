@@ -111,7 +111,4 @@ void print(std::vector<Student> &students, std::ostream &os) {
   for (Student &student : students)
     print(student, os);
 }
-void print_for_test(std::vector<Student> &students, std::ostream &os){
-  for (Student &student : students)
-    print(student, os);
-}
+

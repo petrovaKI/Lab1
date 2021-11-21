@@ -26,5 +26,4 @@ std::vector<Student> parse_file(json &data);
 void print();
 void print(const Student &student, std::ostream &os);
 void print(std::vector<Student> &students, std::ostream &os);
-void print_for_test(std::vector<Student> &students, std::ostream &os);
 #endif // INCLUDE_STUDENT_HPP_

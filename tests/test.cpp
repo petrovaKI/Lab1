@@ -11,7 +11,7 @@ TEST(Test1, parse_file) {
                    (std::vector<std::string>)debts};
   std::vector<Student> students_1 = {one, two, three};
   std::stringstream ss1;
-  print_for_test(students_1, ss1);
+  print(students_1, ss1);
 
   auto text = R"(
 {
@@ -45,10 +45,10 @@ TEST(Test1, parse_file) {
 })";
   std::stringstream ss;
   ss << text;
-  json obj2 = json::parse(ss);
-  std::vector<Student> students_2 = parse_file(obj2);
+  nlohmann::json data = json::parse(ss);
+  std::vector<Student> students_2 = parse_file(data);
   std::stringstream ss2;
-  print_for_test(students_2, ss2);
+  print(students_2, ss2);
 
   ASSERT_EQ(ss1.str(), ss2.str());
 
@@ -67,20 +67,21 @@ TEST(Test2, correct_types_1){
   nlohmann::json data = json::parse(data_str);
   Student st;
   make_stud(data, st);
-  ASSERT_TRUE(st.group.type()==typeid(std::size_t));
-  ASSERT_TRUE(st.avg.type()==typeid(double));
-  ASSERT_TRUE(st.debt.type()== typeid(std::vector<std::string>));
+  EXPECT_TRUE(st.group.type()==typeid(std::size_t));
+  EXPECT_TRUE(st.avg.type()==typeid(double));
+  EXPECT_TRUE(st.debt.type()== typeid(std::vector<std::string>));
 }
 TEST(Test3, correct_types_2){
   const std::string data_str ="{\n"
       "      \"name\": \"Ivanov Petr\",\n"
       "      \"group\": \"IU8-31\",\n"
-      "      \"avg\": 4.25,\n"
+      "      \"avg\": 4,\n"
       "      \"debt\": null\n"
       "    }";
   nlohmann::json data = json::parse(data_str);
   Student st;
   make_stud(data, st);
-  ASSERT_TRUE(st.group.type()==typeid(std::string));
-  ASSERT_TRUE(st.debt.type()==typeid(nullptr));
+  EXPECT_TRUE(st.group.type()==typeid(std::string));
+  EXPECT_TRUE(st.avg.type()==typeid(std::size_t));
+  EXPECT_TRUE(st.debt.type()==typeid(nullptr));
 }
